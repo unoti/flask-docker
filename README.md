@@ -1,6 +1,16 @@
 # Flask_docker
 Experiment to get a minimal web app running with Flask and Docker.
 
+## Contents
+This project contains the following folders:
+* **Web**. Back Flask app for getting started with docker.
+   * This is a basic flask app, based on on ChloeCodesThings [github chloe_flask_docker_demo](https://github.com/ChloeCodesThings/chloe_flask_docker_demo/tree/master/web).  It's great for getting started, but has a few important shortcomings:
+   * Builds a very fat docker image
+   * Not suited for quick iterative development, and doesn't talk about getting a local sql server going.
+* **Iterative**. More advanced setup overcoming the above shortcomings based on the Hackernoon Blob Post above [efficient development with docker and docker compose](https://hackernoon.com/efficient-development-with-docker-and-docker-compose-e354b4d24831).
+
+# Web
+
 ## Operations
 Here's how to do basic things without using ```docker compose```.
 
@@ -33,10 +43,24 @@ The real way to run it is with ```docker-compose```:
    docker-compose up --build
    ```
 
+
+# Iterative
+This section is based on this HackerNoon [blog post](https://hackernoon.com/efficient-development-with-docker-and-docker-compose-e354b4d24831) using this [github code](https://github.com/larsderidder/docker-compose-development-env).
+
+We'll have local environments used for development, and remote environments (test and prod) where we'll deploy.  Setup for these is composed as follows:
+   * **docker-compose.common.yml** Contains setup common to both the local environment and remote environments.
+
+
+
 ## FAQ
 * When I started my flask app, it exited.  I can tell because ```docker ps -a``` shows that ```python app.py``` immediately exited.  How can I see what the problem was?
-* [Docker docs: View logs for a container or service](https://docs.docker.com/config/containers/logging/)
+   * ```docker logs {service_name}```
+   * [Docker docs: View logs for a container or service](https://docs.docker.com/config/containers/logging/)
 * When I do a ```docker build``` and ```docker run```, where does it store the image and retrieve the image?
+   * Commands for working with images:
+      * ```docker``` lists commands, and many relate to images:
+      * ```docker images``` lists images
+      * ```docker rmi {image}``` removes an image
 * What's the deal with docker compose?
 
 ## Next steps
@@ -50,3 +74,4 @@ The real way to run it is with ```docker-compose```:
 ## References
  * [Blog: Hello Whale: Docker + Flask](https://codefresh.io/docker-tutorial/hello-whale-getting-started-docker-flask/)
   * ChloeCodesThings [github chloe_flask_docker_demo](https://github.com/ChloeCodesThings/chloe_flask_docker_demo/tree/master/web) which I brazenly stole from
+  * HackerNoon [Efficient development with Docker and Docker-Compose](https://hackernoon.com/efficient-development-with-docker-and-docker-compose-e354b4d24831)
