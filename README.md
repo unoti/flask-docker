@@ -2,6 +2,8 @@
 Experiment to get a minimal web app running with Flask and Docker.
 
 ## Operations
+Here's how to do basic things without using ```docker compose```.
+
  * **Build docker image**
     ```
     docker build -t flask-sample:latest .
@@ -14,17 +16,28 @@ Experiment to get a minimal web app running with Flask and Docker.
     ```
     docker ps -a
     ```
-  * **See stdout**
+ * **See stdout**
     1. Determine the name of the service using ```docker ps -a``` and look at NAMES column
     2. View logs:
         ```
         docker logs {service_name}
         ```
+The real way to run it is with ```docker-compose```:
+   Run it with the last image.  This will only build the docker image if it doesn't yet exist:
+   ```
+   docker-compose up
+   ```
+
+   Rebuild and run:
+   ```
+   docker-compose up --build
+   ```
 
 ## FAQ
 * When I started my flask app, it exited.  I can tell because ```docker ps -a``` shows that ```python app.py``` immediately exited.  How can I see what the problem was?
 * [Docker docs: View logs for a container or service](https://docs.docker.com/config/containers/logging/)
 * When I do a ```docker build``` and ```docker run```, where does it store the image and retrieve the image?
+* What's the deal with docker compose?
 
 ## Next steps
  * Meaning of the ports and other flags
